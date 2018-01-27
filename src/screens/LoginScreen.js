@@ -18,7 +18,7 @@ class LoginScreen extends React.Component {
     }
 
     handleLoginPress() {
-
+        this.props.navigation.navigate('DrawerNavigation');
     }
 
     renderButtons() {
@@ -43,7 +43,7 @@ class LoginScreen extends React.Component {
         return (
             <View style={styles.containerStyle}>
                 <KeyboardAvoidingView style={styles.contentContainer} behavior={'padding'}>
-                    <Text style={styles.titleText}>Title Here</Text>
+                    <Text style={styles.titleText}>SweetDreams</Text>
                     <Text style={styles.textInputTitle}>Email</Text>
                     <TextInput
                         style={styles.textInputStyle}

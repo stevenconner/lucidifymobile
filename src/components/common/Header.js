@@ -1,7 +1,7 @@
 // Import libraries for making a Component
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform } from 'react-native';
-import { MAIN_COLOR, SECONDARY_COLOR } from '../../styles';
+import * as STYLES from '../../styles';
 
 // Make a component
 const Header = (props) => {
@@ -49,7 +49,7 @@ const styles = {
     justifyContent: 'center',
   },
   leftTextStyle: {
-    color: MAIN_COLOR,
+    color: STYLES.MAIN_COLOR,
     fontSize: 18,
     paddingTop: 18,
     paddingLeft: 15,
@@ -70,7 +70,7 @@ const styles = {
     justifyContent: 'center',
   },
   rightTextStyle: {
-    color: MAIN_COLOR,
+    color: STYLES.MAIN_COLOR,
     fontSize: 18,
     paddingTop: 18,
     paddingRight: 15,

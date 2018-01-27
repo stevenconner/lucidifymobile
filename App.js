@@ -7,7 +7,7 @@ import getStore from './src/state/Store';
 import { BackHandler } from 'react-native';
 
 const AppNavigator = StackNavigator(Routes, {
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'DrawerNavigation',
   headerMode: 'screen',
   mode: 'card',
   navigationOptions: {
