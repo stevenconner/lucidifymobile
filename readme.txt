@@ -1,5 +1,4 @@
-This is a simple boilerplate for use with expo apps
-the packages you need to npm install are:
+This is a hackathon project for Valley Hackathon 2018!
 
-react-redux, redux, redux-thunk, react-navigation
-
+### Setup
+`yarn install`
