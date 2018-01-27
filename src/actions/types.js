@@ -1,7 +1,8 @@
 // This is where we declare types to use in redux reducers
 
 // Types for authentication
-export const ATTEMPT_LOG_IN = 'attempt_log_in';
+export const SET_AUTH_ERROR = 'set_auth_error';
 export const LOG_IN_SUCCESS = 'log_in_success';
-export const LOG_IN_FAIL = 'log_in_fail';
-export const LOG_OUT = 'log_out';
+
+// Types for fetching
+export const SET_LOADING_STATE = 'set_loading_state';
