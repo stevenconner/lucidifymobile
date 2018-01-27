@@ -9,7 +9,8 @@ import {
     TextInput,
     KeyboardAvoidingView,
     ActivityIndicator,
-    AsyncStorage
+    AsyncStorage,
+    Image
 } from 'react-native';
 import { SafeAreaView, NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
@@ -132,6 +133,11 @@ class LoginScreen extends React.Component {
                         {this.renderErrorMsg()}
                         {this.renderButtons()}
                     </KeyboardAvoidingView>
+                    <Image
+                        source={require('../../assets/images/splash3.jpg')}
+                        style={styles.backgroundImage}
+                        resizeMode={'cover'}
+                    />
                 </View>
             </SafeAreaView>
         )
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: 'bold',
         fontFamily: 'Sedgwick',
-        color: STYLES.SD_DARK_PURPLE,
+        color: '#fff',
         lineHeight: 55,
     },
     textInputTitle: {
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         fontWeight: '400',
         alignSelf: 'flex-start',
-        color: STYLES.SD_DARK_PURPLE,
+        color: '#fff',
     },
     textInputStyle: {
         height: 38,
@@ -183,6 +189,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff'
     },
+    backgroundImage: {
+        position: 'absolute',
+        zIndex: -5,
+        height: '100%',
+        top: 0,
+    }
 })
 
 const mapStateToProps = state => {

@@ -35,7 +35,7 @@ class JournalScreen extends React.Component {
                     <ScrollView style={styles.contentContainer}>
                         <TouchableOpacity style={styles.imageContainer} onPress={() => this.props.navigation.navigate('EnterJournalScreen', { type: 'day' })}>
                             <Animatable.Image
-                                source={require('../../assets/images/daytime.png')}
+                                source={require('../../assets/images/day.png')}
                                 style={styles.imageStyle}
                                 resizeMode={'contain'}
                                 animation={'bounceInLeft'}
@@ -45,12 +45,12 @@ class JournalScreen extends React.Component {
                                 animation={'fadeIn'}
                                 delay={500}
                             >
-                                Day JournaL
+                                Day Journal
                             </Animatable.Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.imageContainer} onPress={() => this.props.navigation.navigate('EnterJournalScreen', { type: 'dream' })}>
                             <Animatable.Image
-                                source={require('../../assets/images/nighttime.png')}
+                                source={require('../../assets/images/night.jpg')}
                                 style={styles.imageStyle}
                                 resizeMode={'contain'}
                                 animation={'bounceInRight'}
@@ -60,7 +60,7 @@ class JournalScreen extends React.Component {
                                 animation={'fadeIn'}
                                 delay={1000}
                             >
-                                Dream JournaL
+                                Dream Journal
                             </Animatable.Text>
                         </TouchableOpacity>
                     </ScrollView>

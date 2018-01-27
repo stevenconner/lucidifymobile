@@ -70,6 +70,9 @@ class AppWithNavigationState extends React.Component {
     const imageAssets = cacheImages([
       require('./assets/images/daytime.png'),
       require('./assets/images/nighttime.png'),
+      require('./assets/images/day.png'),
+      require('./assets/images/night.jpg'),
+      require('./assets/images/splash3.jpg'),
     ])
     const fontAssets = cacheFonts([
       { 'IndieFlower': require('./assets/fonts/IndieFlower.ttf') },
