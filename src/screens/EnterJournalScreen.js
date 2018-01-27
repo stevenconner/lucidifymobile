@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { submitEntry } from '../actions';
 
 import { View, Text, StyleSheet, TextInput, Platform } from 'react-native';
 import { Button } from '../components/common';
@@ -10,6 +12,20 @@ class EnterJournalScreen extends React.Component {
     state = {
         journalText: '',
         error: '',
+    }
+
+    handleSubmitPress() {
+        let type;
+        if (this.props.navigation.state.params.type === 'day') {
+            type = 1;
+        } else {
+            type = 2;
+        }
+        let obj = {
+            content: this.state.journalText,
+            type: type,
+        }
+        this.props.submitEntry(obj, this.props.navigation);
     }
 
     renderSubmitButton() {
@@ -27,6 +43,7 @@ class EnterJournalScreen extends React.Component {
                 <Button
                     style={{ width: '95%', height: 50, borderColor: STYLES.SD_DARK_PURPLE }}
                     textStyle={{ color: STYLES.SD_DARK_PURPLE }}
+                    onPress={() => this.handleSubmitPress()}
                 >
                     Submit
                 </Button>
@@ -90,4 +107,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default EnterJournalScreen;
+export default connect(null, { submitEntry })(EnterJournalScreen);

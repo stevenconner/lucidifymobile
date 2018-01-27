@@ -8,19 +8,22 @@ export const checkTokens = () => {
         // Pull jwt and refresh token out of AsyncStorage
         let jwt = await AsyncStorage.getItem('jwt');
         let refreshToken = await AsyncStorage.getItem('refreshToken');
+        console.log('jwt', jwt);
+        console.log('refreshToken', refreshToken);
         // Decode the JWT to obtain expire time
         let decoded = jwtDecode(jwt);
+        console.log('decoded', decoded);
         // Get current time
         let time = Math.floor(Date.now() / 1000);
         // Check if time plus 50 is less than expire time
-        if ((time + 50) < decoded.iat) {
+        if ((time + 50) < decoded.exp) {
             // JWT is still good, resolve promise with JWT
             console.log('jwt still good');
             resolve(jwt);
         } else {
             // JWT needs to be refreshed, fetch to endpoint for new JWT
             let request = fetch(
-                API_URL + 'auth',
+                API_URL + '/auth',
                 {
                     method: 'POST',
                     body: JSON.stringify({
