@@ -1,5 +1,8 @@
 import React from 'react';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import * as STYLES from '../styles';
+import { Icon } from 'react-native-elements';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
@@ -15,38 +18,61 @@ const JournalStack = StackNavigator({
     },
     EnterJournalScreen: {
         screen: EnterJournalScreen,
+    },
+    SettingsScreen: {
+        screen: SettingsScreen,
     }
 }, {
         navigationOptions: {
-            drawerLabel: 'Journal',
+            tabBarLabel: 'Journal',
             header: null,
+            tabBarIcon: ({ tintColor }) => 
+                <Icon
+                    name={'notebook'}
+                    type={'simple-line-icon'}
+                    color={tintColor}
+                    size={20}
+                />
         }
-})
+    })
 
-const DrawerNavigation = DrawerNavigator({
+const TabNavigation = TabNavigator({
     JournalStack: {
         screen: JournalStack,
-    },
-    JournalEntriesScreen: {
-        screen: JournalEntriesScreen,
-        navigationOptions: {
-            drawerLabel: 'Entries',
-        }
     },
     TrendsScreen: {
         screen: TrendsScreen,
         navigationOptions: {
-            drawerLabel: 'Trends',
-        }
-    },
-    SettingsScreen: {
-        screen: SettingsScreen,
-        navigationOptions: {
-            drawerLabel: 'Settings',
+            tabBarLabel: 'Trends',
+            header: null,
+            tabBarIcon: ({ tintColor }) => 
+                <Icon
+                    name={'graph'}
+                    type={'simple-line-icon'}
+                    color={tintColor}
+                    size={25}
+                />
         }
     },
 }, {
-        initialRouteName: 'JournalStack'
+    initialRouteName: 'JournalStack',
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+        activeTintColor: STYLES.TEXT_COLOR,
+        inactiveTintColor: STYLES.TEXT_ACCENT,
+        style: {
+            backgroundColor: STYLES.SD_DARK_PURPLE,
+            paddingBottom: 5,
+        },
+        indicatorStyle: {
+            backgroundColor: STYLES.TEXT_COLOR
+        },
+        labelStyle: {
+            fontWeight: '700',
+        },
+        pressColor: STYLES.TEXT_COLOR,
+        showIcon: true,
+    }
 })
 
 export const Routes = {
@@ -66,8 +92,8 @@ export const Routes = {
             header: null,
         }
     },
-    DrawerNavigation: {
-        screen: DrawerNavigation,
+    TabNavigation: {
+        screen: TabNavigation,
         mode: 'card',
         navigationOptions: {
             gesturesEnabled: false,

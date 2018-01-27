@@ -81,7 +81,7 @@ class JournalEntriesScreen extends React.Component {
             return (
                 <SafeAreaView style={styles.safeArea}>
                     <View style={styles.loadingContainer}>
-                        <ActivityIndicator size={'large'} color={STYLES.SD_DARK_PURPLE} />
+                        <ActivityIndicator size={'large'} color={STYLES.TEXT_COLOR} />
                     </View>
                 </SafeAreaView>
             )

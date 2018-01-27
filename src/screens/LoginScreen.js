@@ -13,7 +13,7 @@ import {
     Image
 } from 'react-native';
 import { SafeAreaView, NavigationActions } from 'react-navigation';
-import { Button } from 'react-native-elements';
+import { Button } from 'react-native-material-ui';
 import Toast from 'react-native-root-toast';
 import * as STYLES from '../styles';
 
@@ -31,7 +31,7 @@ class LoginScreen extends React.Component {
                 index: 0,
                 key: null,
                 actions: [
-                    NavigationActions.navigate({ routeName: 'DrawerNavigation' })
+                    NavigationActions.navigate({ routeName: 'TabNavigation' })
                 ]
             })
             this.props.navigation.dispatch(resetAction);
@@ -59,23 +59,24 @@ class LoginScreen extends React.Component {
         if (this.props.loading) {
             return (
                 <View style={{ width: '100%', marginTop: 10 }}>
-                    <ActivityIndicator size={'large'} color={STYLES.SD_DARK_PURPLE} />
+                    <ActivityIndicator size={'large'} color={STYLES.TEXT_COLOR} />
                 </View>
             )
         } else {
             return (
                 <View style={{ width: '100%', marginTop: 10 }}>
                     <Button
-                        style={{ marginTop: 10 }}
+                        primary
+                        raised
+                        text="Login"
                         onPress={() => this.handleLoginPress()}
-                        title={'LOGIN'}
-                        backgroundColor={STYLES.SD_PURPLE}
+                        style={{ container: { marginVertical: 10 }}}
                     />
                     <Button
-                        style={{ marginTop: 10 }}
+                        raised
+                        text="Register"
+                        style={styles.buttonStyle}
                         onPress={() => this.props.navigation.navigate('RegisterScreen')}
-                        title={'REGISTER'}
-                        backgroundColor={STYLES.SD_PURPLE}
                     />
                 </View>
             )
@@ -93,7 +94,7 @@ class LoginScreen extends React.Component {
             return (
                 <SafeAreaView style={styles.safeArea}>
                     <View style={styles.loadingContainer}>
-                        <ActivityIndicator size={'large'} color={STYLES.SD_DARK_PURPLE} />
+                        <ActivityIndicator size={'large'} color={STYLES.TEXT_COLOR} />
                     </View>
                 </SafeAreaView>
             )
@@ -109,12 +110,12 @@ class LoginScreen extends React.Component {
                             onChangeText={(text) => this.setState({ email: text, error: '' })}
                             value={this.state.email}
                             placeholder={'Email@Address.com'}
-                            placeholderTextColor={'#888'}
+                            placeholderTextColor={'#aaa'}
                             autoCorrect={false}
                             autoCapitalize={'none'}
                             keyboardType={'email-address'}
                             underlineColorAndroid={'transparent'}
-                            selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         <Text style={styles.textInputTitle}>Password</Text>
                         <TextInput
@@ -122,19 +123,19 @@ class LoginScreen extends React.Component {
                             onChangeText={(text) => this.setState({ password: text, error: '' })}
                             value={this.state.password}
                             placeholder={'Password'}
-                            placeholderTextColor={'#888'}
+                            placeholderTextColor={'#aaa'}
                             autoCorrect={false}
                             autoCapitalize={'none'}
                             secureTextEntry={true}
                             underlineColorAndroid={'transparent'}
                             onSubmitEditing={() => this.handleLoginPress()}
-                            selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         {this.renderErrorMsg()}
                         {this.renderButtons()}
                     </KeyboardAvoidingView>
                     <Image
-                        source={require('../../assets/images/splash3.jpg')}
+                        source={require('../../assets/images/night.jpg')}
                         style={styles.backgroundImage}
                         resizeMode={'cover'}
                     />
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 36,
         fontWeight: 'bold',
-        fontFamily: 'Sedgwick',
+        fontFamily: 'Roboto',
         color: '#fff',
         lineHeight: 55,
     },
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         alignSelf: 'flex-start',
         color: '#fff',
+        fontFamily: 'Roboto',
     },
     textInputStyle: {
         height: 38,
@@ -178,6 +180,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginVertical: 5,
         padding: 5,
+        fontFamily: 'Roboto',
+        color: '#fff',
     },
     errorMsg: {
         color: '#a00',
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
         zIndex: -5,
         height: '100%',
         top: 0,
-    }
+    },
 })
 
 const mapStateToProps = state => {

@@ -1,7 +1,8 @@
 // Import libraries for making a Component
 import React from 'react';
-import { Text, View, TouchableOpacity, Platform } from 'react-native';
+import { Text, View, TouchableOpacity, Platform, Image } from 'react-native';
 import * as STYLES from '../../styles';
+import { Icon } from 'react-native-elements';
 
 // Make a component
 const Header = (props) => {
@@ -9,16 +10,24 @@ const Header = (props) => {
     <View style={styles.viewStyle}>
       <View style={styles.leftViewStyle}>
         <TouchableOpacity style={styles.leftTouchable} onPress={props.leftPress}>
-          <Text style={styles.leftTextStyle}>{props.leftText}</Text>
+          <Icon
+            name={props.leftIconName}
+            type={props.leftIconType}
+            color={STYLES.TEXT_COLOR}
+            size={24}
+          />
         </TouchableOpacity>
-      </View>
-      <View style={styles.centerViewStyle}>
-        <Text style={styles.centerTextStyle}>{props.centerText}</Text>
       </View>
       <View style={styles.rightViewStyle}>
-        <TouchableOpacity style={styles.rightTouchable} onPress={props.rightPress}>
-          <Text style={styles.rightTextStyle}>{props.rightText}</Text>
-        </TouchableOpacity>
+        {(!props.hideSettings) ?
+          <TouchableOpacity style={styles.rightTouchable} onPress={props.rightPress}>
+            <Icon
+              name={'md-settings'}
+              type={'ionicon'}
+              color={STYLES.TEXT_COLOR}
+              size={24}
+            />
+          </TouchableOpacity> : <View />}
       </View>
     </View>
   );
@@ -26,15 +35,13 @@ const Header = (props) => {
 
 const styles = {
   viewStyle: {
-    height: (Platform.OS === 'android') ? '12%' : '10%',
+    height: 48,
     flexDirection: 'row',
-    backgroundColor: '#f8f8f8',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
+    backgroundColor: STYLES.MAIN_BG_COLOR,
     marginBottom: 10,
     paddingTop: (Platform.OS === 'android') ? 20 : 0,
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
   },
   leftTouchable: {
     width: '100%',
@@ -44,7 +51,6 @@ const styles = {
     alignItems: 'center',
   },
   leftViewStyle: {
-    flex: 0.20,
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
@@ -55,7 +61,6 @@ const styles = {
     paddingLeft: 15,
   },
   centerViewStyle: {
-    flex: 0.60,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -65,7 +70,6 @@ const styles = {
     fontWeight: 'bold'
   },
   rightViewStyle: {
-    flex: 0.20,
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
@@ -74,7 +78,7 @@ const styles = {
     fontSize: 18,
     paddingTop: 18,
     paddingRight: 15,
-  }
+  },
 };
 
 // Make the component available to other parts of the app

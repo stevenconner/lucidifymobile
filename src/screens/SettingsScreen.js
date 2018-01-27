@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { logOut } from '../actions';
 
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Header, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import { Header } from '../components/common';
 import { SafeAreaView } from 'react-navigation';
 import * as STYLES from '../styles';
 
@@ -17,17 +18,10 @@ class SettingsScreen extends React.Component {
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.containerStyle}>
                     <Header
-                        leftComponent={{
-                            icon: 'menu', color: '#fff', onPress: () => this.props.navigation.navigate('DrawerOpen'), underlayColor: 'transparent', type: 'material-community'
-                        }}
-                        centerComponent={{
-                            text: 'Settings', style: { color: '#fff', fontSize: 26, fontWeight: 'bold', fontFamily: 'Sedgwick', lineHeight: 40 }
-                        }}
-                        // rightComponent={{
-                        //     icon: 'refresh', color: '#fff', onPress: () => this.handleRefreshPress(), underlayColor: 'transparent'
-                        // }}
-                        backgroundColor={STYLES.SD_PURPLE}
-                        outerContainerStyles={(Platform.OS === 'android') ? { height: 80 } : {}}
+                        leftIconName={'md-arrow-back'}
+                        leftIconType={'ionicon'}
+                        leftPress={() => this.props.navigation.goBack()}
+                        hideSettings={true}
                     />
                     <View style={[styles.contentContainer, { justifyContent: 'center' }]}>
                         <Button

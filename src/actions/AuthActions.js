@@ -33,7 +33,7 @@ export const logIn = (email, password, navigation) => {
                             index: 0,
                             key: null,
                             actions: [
-                                NavigationActions.navigate({ routeName: 'DrawerNavigation' })
+                                NavigationActions.navigate({ routeName: 'TabNavigation' })
                             ]
                         })
                         navigation.dispatch(resetAction);

@@ -4,6 +4,8 @@ import { StackNavigator, addNavigationHelpers } from 'react-navigation';
 import { Routes } from './src/nav/Router';
 import getStore from './src/state/Store';
 import Expo from 'expo';
+import { COLOR, ThemeProvider } from 'react-native-material-ui';
+import * as STYLES from './src/styles';
 
 import { BackHandler } from 'react-native';
 
@@ -75,7 +77,7 @@ class AppWithNavigationState extends React.Component {
       require('./assets/images/splash3.jpg'),
     ])
     const fontAssets = cacheFonts([
-      { 'IndieFlower': require('./assets/fonts/IndieFlower.ttf') },
+      { 'Roboto': require('./assets/fonts/RobotoMono-Regular.ttf') },
       { 'Sedgwick': require('./assets/fonts/SedgwickAve-Regular.ttf') }
     ])
     await Promise.all([
@@ -105,11 +107,24 @@ class AppWithNavigationState extends React.Component {
 
 const store = getStore(navReducer);
 
+const uiTheme = {
+  palette: {
+      primaryColor: STYLES.SD_DARK_PURPLE,
+  },
+  toolbar: {
+      container: {
+          height: 50,
+      },
+  },
+};
+
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppWithNavigationState />
+        <ThemeProvider uiTheme={uiTheme}>
+          <AppWithNavigationState />
+        </ThemeProvider>
       </Provider>
     )
   }

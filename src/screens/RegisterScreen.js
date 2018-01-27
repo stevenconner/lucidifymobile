@@ -2,9 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { registerWithEmail } from '../actions';
 
-import { View, Text, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
+    ScrollView,
+    KeyboardAvoidingView,
+    ActivityIndicator,
+    TouchableOpacity
+} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+import { Button } from 'react-native-material-ui';
 import * as STYLES from '../styles';
 
 class RegisterScreen extends React.Component {
@@ -61,16 +71,17 @@ class RegisterScreen extends React.Component {
     renderButtons() {
         if (this.props.loading) {
             return (
-                <ActivityIndicator size={'large'} color={STYLES.SD_DARK_PURPLE} />
+                <ActivityIndicator size={'large'} color={STYLES.TEXT_COLOR} />
             )
         } else {
             return (
                 <View style={styles.buttonContainer}>
                     <Button
-                        style={{ marginTop: 10 }}
-                        title={'SUBMIT'}
-                        backgroundColor={STYLES.SD_PURPLE}
+                        primary
+                        raised
+                        text="Submit"
                         onPress={() => this.handleSubmitPress()}
+                        style={{ container: { marginVertical: 10 }}}
                     />
                 </View>
             )
@@ -82,7 +93,7 @@ class RegisterScreen extends React.Component {
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.containerStyle}>
                     <KeyboardAvoidingView style={[styles.contentContainer, { justifyContent: 'center' }]} behavior={'padding'}>
-                        <Text style={styles.titleText}>{STYLES.APP_NAME}</Text>
+                        <Text style={styles.titleText}>Register</Text>
                         <Text style={styles.inputTitle}>First Name</Text>
                         <TextInput
                             style={styles.inputStyle}
@@ -93,6 +104,7 @@ class RegisterScreen extends React.Component {
                             keyboardType={'default'}
                             underlineColorAndroid={'transparent'}
                             selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         <Text style={styles.inputTitle}>Email Address</Text>
                         <TextInput
@@ -104,6 +116,7 @@ class RegisterScreen extends React.Component {
                             keyboardType={'email-address'}
                             underlineColorAndroid={'transparent'}
                             selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         <Text style={styles.inputTitle}>Password</Text>
                         <TextInput
@@ -116,6 +129,7 @@ class RegisterScreen extends React.Component {
                             secureTextEntry={true}
                             underlineColorAndroid={'transparent'}
                             selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         <Text style={styles.inputTitle}>Confirm Password</Text>
                         <TextInput
@@ -128,17 +142,20 @@ class RegisterScreen extends React.Component {
                             secureTextEntry={true}
                             underlineColorAndroid={'transparent'}
                             selectionColor={STYLES.SD_DARK_PURPLE}
+                            selectionColor={'#fff'}
                         />
                         {this.renderButtons()}
-                        <View style={styles.backButtonContainer}>
+                        <TouchableOpacity
+                            style={styles.backButtonContainer}
+                            onPress={() => this.props.navigation.goBack()}
+                        >
                             <Icon
-                                name={'ios-arrow-back'}
+                                name={'md-arrow-back'}
                                 type={'ionicon'}
-                                color={STYLES.SD_DARK_PURPLE}
+                                color={STYLES.TEXT_COLOR}
                                 size={30}
-                                onPress={() => this.props.navigation.goBack()}
                             />
-                        </View>
+                        </TouchableOpacity>
                     </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
@@ -159,22 +176,25 @@ const styles = StyleSheet.create({
         margin: 5,
         paddingHorizontal: 8,
         alignSelf: 'center',
+        color: '#fff',
     },
     inputTitle: {
         fontSize: 18,
         marginVertical: 5,
         fontWeight: '400',
         alignSelf: 'flex-start',
-        color: STYLES.SD_DARK_PURPLE,
+        color: STYLES.TEXT_COLOR,
+        fontFamily: 'Roboto',
     },
     titleText: {
         fontSize: 36,
         fontWeight: 'bold',
         fontFamily: 'Sedgwick',
-        color: STYLES.SD_DARK_PURPLE,
+        color: STYLES.TEXT_COLOR,
         textAlign: 'center',
         marginBottom: 20,
         lineHeight: 55,
+        fontFamily: 'Roboto',
     },
     buttonContainer: {
         marginTop: 20,
@@ -183,6 +203,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 15,
         left: 15,
+        paddingHorizontal: 10
     }
 })
 
