@@ -86,7 +86,6 @@ class JournalItem extends React.Component {
 
     render() {
         let item = this.props.item;
-        console.log('item', item);
         let date = moment(item.dateAdded).format('MMM D, YYYY')
         let time = moment(item.dateAdded).format('h:mm a')
         return (

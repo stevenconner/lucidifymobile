@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { submitEntry } from '../actions';
 import moment from 'moment';
 
-import { View, Text, StyleSheet, TextInput, Platform, Image, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Platform, Image, Linking, TouchableOpacity, ScrollView } from 'react-native';
 import { Button, Header, Separator } from '../components/common';
 import { SafeAreaView } from 'react-navigation';
 import * as STYLES from '../styles';
@@ -21,6 +21,7 @@ class EnterJournalScreen extends React.Component {
     componentWillMount() {
         if (this.props.navigation.state.params.editing) {
             let item = this.props.navigation.state.params.item;
+            console.log('item', item);
             let date = moment(item.dateAdded).format('MMM, D, YYYY');
             this.setState({
                 journalText: item.content,
@@ -198,7 +199,7 @@ class EnterJournalScreen extends React.Component {
         let date = new moment().format('MMM D, YYYY');
         return (
             <SafeAreaView style={styles.safeArea}>
-                <View style={styles.containerStyle}>
+                <View style={[styles.containerStyle, { paddingBottom: 5 }]}>
                     <Header
                         leftIconName={(this.state.journalText && !editing) ? 'x' : 'md-arrow-back'}
                         leftIconType={(this.state.journalText && !editing) ? 'octicon' : 'ionicon'}
@@ -207,7 +208,7 @@ class EnterJournalScreen extends React.Component {
                         hideSettings={true}
                         saveText={(editing) ? false : true}
                     />
-                    <View style={styles.contentContainer}>
+                    <ScrollView style={styles.contentContainer}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.dateText}>
                                 {date}
@@ -229,7 +230,7 @@ class EnterJournalScreen extends React.Component {
                             selectionColor={'#fff'}
                             editable={(editing) ? false : true}
                         />
-                    </View>
+                    </ScrollView>
                 </View>
             </SafeAreaView>
         )

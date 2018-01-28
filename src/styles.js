@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 const purple = '#9162e4';
 const yellow = '#d7d7a0';
 
@@ -18,6 +20,7 @@ export const SAFEAREA_STYLE = { flex: 1, backgroundColor: MAIN_BG_COLOR };
 export const CONTAINER_STYLE = {
     backgroundColor: MAIN_BG_COLOR,
     flex: 1,
+    paddingTop: (Platform.OS === 'android') ? 20 : 0,
 }
 
 export const CONTENT_CONTAINER_STYLE = {
