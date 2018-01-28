@@ -1,4 +1,4 @@
-const purple = '#7b64ec';
+const purple = '#9162e4';
 const yellow = '#d7d7a0';
 
 export const APP_NAME = 'Lucidify';

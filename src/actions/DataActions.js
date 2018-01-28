@@ -1,7 +1,6 @@
 import {
     SET_LOADING_STATE,
-    SET_DAY_JOURNAL_ENTRIES,
-    SET_DREAM_JOURNAL_ENTRIES,
+    SET_JOURNAL_ENTRIES,
     SET_FETCH_ERROR
 } from './types';
 import { checkTokens } from './HelperActions';
@@ -36,8 +35,7 @@ export const submitEntry = (obj, navigation) => {
                             hideOnPress: true,
                             delay: 0
                         });
-                        dispatch({ type: SET_DAY_JOURNAL_ENTRIES, payload: respJson.journals.day });
-                        dispatch({ type: SET_DREAM_JOURNAL_ENTRIES, payload: respJson.journals.dream });
+                        dispatch({ type: SET_JOURNAL_ENTRIES, payload: respJson.journals.all });
                         if (navigation) {
                             navigation.goBack();
                         }
@@ -69,8 +67,7 @@ export const getEntries = () => {
                     resp.json().then(respJson => {
                         console.log('get entries respJson', respJson);
                         dispatch({ type: SET_LOADING_STATE, payload: false });
-                        dispatch({ type: SET_DAY_JOURNAL_ENTRIES, payload: respJson.journals.day });
-                        dispatch({ type: SET_DREAM_JOURNAL_ENTRIES, payload: respJson.journals.dream });
+                        dispatch({ type: SET_JOURNAL_ENTRIES, payload: respJson.journals.all });
                     })
                 } else {
                     dispatch({ type: SET_LOADING_STATE, payload: false });

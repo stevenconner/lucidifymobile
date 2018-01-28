@@ -1,28 +1,40 @@
 import React from 'react';
 
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
+import * as STYLES from '../styles';
 
 class DayNightSwitch extends React.Component {
     render() {
+        let selected = this.props.selected;
+        console.log('selected', selected);
         return (
-            <View style={styles.outerView}>
-                <TouchableOpacity
-                    style={[styles.left, { backgroundColor: (this.props.selected === 'day') ? '#ff6' : '#eee' }]}
-                    onPress={this.props.dayPress}
+            <TouchableOpacity style={[styles.outerView, {borderColor: (selected == 1) ? '#fff' : STYLES.SD_DARK_PURPLE}]} onPress={this.props.onPress}>
+                <View
+                    style={styles.left}
                 >
-                    <Text style={styles.dayText}>
-                        Days
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.right, { backgroundColor: (this.props.selected === 'dream') ? '#555666' : '#eee' }]}
-                    onPress={this.props.dreamPress}
+                    <View style={(selected == 1) ? styles.selectedCircle : styles.circle}>
+                        <Icon
+                            name={'md-sunny'}
+                            type={'ionicon'}
+                            size={20}
+                            color={'#000'}
+                        />
+                    </View>
+                </View>
+                <View
+                    style={styles.right}
                 >
-                    <Text style={[styles.dreamText, { color: (this.props.selected === 'dream') ? '#fff' : '#000' }]}>
-                        Dreams
-                    </Text>
-                </TouchableOpacity>
-            </View>
+                    <View style={(selected == 2) ? styles.sleepCircle : styles.circle}>
+                        <Icon
+                            name={'moon'}
+                            type={'entypo'}
+                            size={20}
+                            color={(selected == 2) ? '#000' : '#fff'}
+                        />
+                    </View>
+                </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -30,27 +42,26 @@ class DayNightSwitch extends React.Component {
 const styles = StyleSheet.create({
     outerView: {
         alignSelf: 'center',
-        width: '80%',
-        height: 45,
+        width: 65,
+        height: 28,
         borderRadius: 20,
-        borderColor: '#000',
-        borderWidth: 1,
+        borderColor: STYLES.TEXT_COLOR,
+        borderWidth: 2,
         flexDirection: 'row',
         overflow: 'hidden',
+        alignSelf: 'center',
+        backgroundColor: STYLES.MAIN_BG_COLOR,
     },
     left: {
         flex: 1,
         overflow: 'hidden',
-        borderRightWidth: 0.5,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
     },
     right: {
-        backgroundColor: '#ddd',
         flex: 1,
         overflow: 'hidden',
-        borderLeftWidth: 0.5,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
     },
     dayText: {
@@ -61,6 +72,36 @@ const styles = StyleSheet.create({
     dreamText: {
         fontSize: 20,
         fontFamily: 'Sedgwick',
+    },
+    selectedCircle: {
+        height: 26,
+        width: 26,
+        borderRadius: 13,
+        backgroundColor: STYLES.TEXT_COLOR,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight: 2,
+        paddingTop: 1,
+    },
+    circle: {
+        height: 26,
+        width: 26,
+        borderRadius: 13,
+        backgroundColor: STYLES.MAIN_BG_COLOR,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight: 2,
+        paddingTop: 1,
+    },
+    sleepCircle: {
+        height: 26,
+        width: 26,
+        borderRadius: 13,
+        backgroundColor: STYLES.SD_DARK_PURPLE,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight: 2,
+        paddingTop: 1,
     }
 })
 

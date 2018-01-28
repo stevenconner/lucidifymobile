@@ -12,6 +12,27 @@ import TrendsScreen from '../screens/TrendsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import EnterJournalScreen from '../screens/EnterJournalScreen';
 
+const TrendsStack = StackNavigator({
+    TrendsScreen: {
+        screen: TrendsScreen,
+    },
+    SettingsScreen: {
+        screen: SettingsScreen,
+    }
+}, {
+    navigationOptions: {
+        tabBarLabel: 'Trends',
+        header: null,
+        tabBarIcon: ({ tintColor }) => 
+            <Icon
+                name={'graph'}
+                type={'simple-line-icon'}
+                color={tintColor}
+                size={25}
+            />
+    }
+})
+
 const JournalStack = StackNavigator({
     JournalScreen: {
         screen: JournalScreen,
@@ -40,20 +61,9 @@ const TabNavigation = TabNavigator({
     JournalStack: {
         screen: JournalStack,
     },
-    TrendsScreen: {
-        screen: TrendsScreen,
-        navigationOptions: {
-            tabBarLabel: 'Trends',
-            header: null,
-            tabBarIcon: ({ tintColor }) => 
-                <Icon
-                    name={'graph'}
-                    type={'simple-line-icon'}
-                    color={tintColor}
-                    size={25}
-                />
-        }
-    },
+    TrendsStack: {
+        screen: TrendsStack,
+    }
 }, {
     initialRouteName: 'JournalStack',
     tabBarPosition: 'bottom',

@@ -27,7 +27,7 @@ const Header = (props) => {
               color={STYLES.TEXT_COLOR}
               size={24}
             />
-          </TouchableOpacity> : <View />}
+          </TouchableOpacity> : (props.saveText) ? <Text style={styles.saveText} onPress={props.rightPress}>SAVE</Text> :  <View />}
       </View>
     </View>
   );
@@ -79,6 +79,11 @@ const styles = {
     paddingTop: 18,
     paddingRight: 15,
   },
+  saveText: {
+    color: STYLES.TEXT_COLOR,
+    fontSize: 16,
+    fontWeight: '600',
+  }
 };
 
 // Make the component available to other parts of the app

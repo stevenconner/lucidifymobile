@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Header } from 'react-native-elements';
+import { Header } from '../components/common';
 import { SafeAreaView } from 'react-navigation';
 import * as STYLES from '../styles';
 
@@ -11,17 +11,10 @@ class TrendsScreen extends React.Component {
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.containerStyle}>
                     <Header
-                        leftComponent={{
-                            icon: 'menu', color: '#fff', onPress: () => this.props.navigation.navigate('DrawerOpen'), underlayColor: 'transparent', type: 'material-community'
-                        }}
-                        centerComponent={{
-                            text: 'Trends', style: { color: '#fff', fontSize: 26, fontWeight: 'bold', fontFamily: 'Sedgwick', lineHeight: 40 }
-                        }}
-                        // rightComponent={{
-                        //     icon: 'refresh', color: '#fff', onPress: () => this.handleRefreshPress(), underlayColor: 'transparent'
-                        // }}
-                        backgroundColor={STYLES.SD_PURPLE}
-                        outerContainerStyles={(Platform.OS === 'android') ? { height: 80 } : {}}
+                        // leftIconName={'md-arrow-back'}
+                        // leftIconType={'ionicon'}
+                        // leftPress={() => this.props.navigation.goBack()}
+                        rightPress={() => this.props.navigation.navigate('SettingsScreen')}
                     />
                     <View style={styles.contentContainer}>
                         <Text>This is the trends screen</Text>

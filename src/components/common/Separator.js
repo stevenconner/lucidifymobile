@@ -9,7 +9,9 @@ const Separator = props => {
                 {
                     height: 1,
                     borderWidth: 0.5,
-                    opacity: 0.1
+                    opacity: 0.1,
+                    borderColor: '#fff',
+                    marginVertical: 16,
                 }
             ]}
         />

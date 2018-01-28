@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getEntries } from '../actions';
 
 import {
     View,
@@ -7,14 +9,31 @@ import {
     Platform,
     Image,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    FlatList
 } from 'react-native';
-import { Header } from '../components/common';
+import { Header, Separator } from '../components/common';
 import { SafeAreaView } from 'react-navigation';
 import * as STYLES from '../styles';
 import * as Animatable from 'react-native-animatable';
+import { ActionButton } from 'react-native-material-ui';
+import JournalItem from '../components/JournalItem';
 
 class JournalScreen extends React.Component {
+    componentWillMount() {
+        this.props.getEntries();
+    }
+
+    _keyExtractor = (item, index) => index;
+
+    handleFabPress() {
+        this.props.navigation.navigate('EnterJournalScreen', { editing: false })
+    }
+
+    renderItem(item) {
+        return <JournalItem item={item} onPress={() => this.props.navigation.navigate('EnterJournalScreen', { editing: true, item: item })} />
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.safeArea}>
@@ -25,38 +44,26 @@ class JournalScreen extends React.Component {
                         // leftPress={() => this.props.navigation.goBack()}
                         rightPress={() => this.props.navigation.navigate('SettingsScreen')}
                     />
-                    <ScrollView style={styles.contentContainer}>
-                        <TouchableOpacity style={styles.imageContainer} onPress={() => this.props.navigation.navigate('EnterJournalScreen', { type: 'day' })}>
-                            <Animatable.Image
-                                source={require('../../assets/images/day.png')}
-                                style={styles.imageStyle}
-                                resizeMode={'contain'}
-                                animation={'bounceInLeft'}
-                            />
-                            <Animatable.Text
-                                style={styles.textStyle}
-                                animation={'fadeIn'}
-                                delay={500}
-                            >
-                                Day Journal
-                            </Animatable.Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.imageContainer} onPress={() => this.props.navigation.navigate('EnterJournalScreen', { type: 'dream' })}>
-                            <Animatable.Image
-                                source={require('../../assets/images/night.jpg')}
-                                style={styles.imageStyle}
-                                resizeMode={'contain'}
-                                animation={'bounceInRight'}
-                            />
-                            <Animatable.Text
-                                style={styles.textStyle}
-                                animation={'fadeIn'}
-                                delay={1000}
-                            >
-                                Dream Journal
-                            </Animatable.Text>
-                        </TouchableOpacity>
-                    </ScrollView>
+                    <View style={styles.contentContainer}>
+                        <Text style={styles.titleText}>
+                            Entries
+                        </Text>
+                        <Separator />
+                        <FlatList
+                            data={this.props.journalEntries}
+                            renderItem={({ item }) => this.renderItem(item)}
+                            keyExtractor={this._keyExtractor}
+                            removeClippedSubviews={false}
+                        />
+                    </View>
+                    <ActionButton
+                        onPress={() => this.handleFabPress()}
+                        style={{
+                            container: {
+                                backgroundColor: STYLES.ACCENT_COLOR
+                            }
+                        }}
+                    />
                 </View>
             </SafeAreaView>
         )
@@ -67,25 +74,18 @@ const styles = StyleSheet.create({
     safeArea: STYLES.SAFEAREA_STYLE,
     containerStyle: STYLES.CONTAINER_STYLE,
     contentContainer: STYLES.CONTENT_CONTAINER_STYLE,
-    imageContainer: {
-        height: 230,
-        width: '100%',
-        marginBottom: 10,
-    },
-    imageStyle: {
-        height: '100%',
-        width: '100%',
-    },
-    textStyle: {
-        position: 'absolute',
-        top: 20,
-        left: 40,
-        textAlign: 'center',
-        fontSize: 30,
-        color: '#fff',
-        fontFamily: 'Sedgwick',
-        lineHeight: 50,
+    titleText: {
+        color: STYLES.TEXT_COLOR,
+        fontSize: 23,
+        fontFamily: 'Roboto',
     }
 })
 
-export default JournalScreen;
+const mapStateToProps = state => {
+    const { loading, journalEntries } = state.fetch;
+    console.log('here is journal entries', journalEntries);
+
+    return { loading, journalEntries };
+}
+
+export default connect(mapStateToProps, { getEntries })(JournalScreen);
