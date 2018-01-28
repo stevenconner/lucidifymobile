@@ -105,7 +105,7 @@ class TrendsScreen extends React.Component {
                     />
                     <View style={styles.contentContainer}>
                         <Text style={styles.titleText}>
-                            Entries
+                            Trends
                         </Text>
                         <Separator />
                         <View style={styles.chartContainer}>
